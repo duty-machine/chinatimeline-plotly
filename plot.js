@@ -2,13 +2,13 @@ let rawDataURL = 'https://raw.githubusercontent.com/chinatimeline/data/master/id
 let termURL = 'https://raw.githubusercontent.com/chinatimeline/data/master/ideology/CCP_Presidential_term.csv'
 
 let weekDays = [
+  '周日 Sun',
   '周一 Mon',
   '周二 Tue',
   '周三 Wed',
   '周四 Thu',
   '周五 Fri',
   '周六 Sat',
-  '周日 Sun',
 ]
 
 let shapeColors = [
@@ -157,9 +157,10 @@ function prepEventData(rawData) {
 
     groups[name].map(entry => {
       let date = new Date(Date.parse(entry.date))
-      let dayString = weekDays[date.getDay()]
+      let dayString = weekDays[date.getUTCDay()]
+
       x.push(entry.date)
-      y.push(date.getDay() + (Math.random() * 0.6 + 0.2))
+      y.push(date.getUTCDay() + (Math.random() * 0.6 + 0.2))
       let entryText = `${entry.date}, ${dayString}<br>${entry.name.match(/.{1,50}/g).join('<br>')}`
       hovertext.push(entryText)
     })
