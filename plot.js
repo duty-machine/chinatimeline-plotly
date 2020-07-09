@@ -153,14 +153,15 @@ function prepEventData(rawData) {
   return Object.keys(groups).map((name, index) => {
     let x = []
     let y = []
-    let text = []
+    let hovertext = []
 
     groups[name].map(entry => {
       let date = new Date(Date.parse(entry.date))
       let dayString = weekDays[date.getDay()]
       x.push(entry.date)
       y.push(date.getDay() + (Math.random() * 0.6 + 0.2))
-      text.push(`${entry.date}, ${dayString}<br>${entry.name}`)
+      let entryText = `${entry.date}, ${dayString}<br>${entry.name.match(/.{1,50}/g).join('<br>')}`
+      hovertext.push(entryText)
     })
 
     return {
@@ -169,11 +170,15 @@ function prepEventData(rawData) {
       hoverinfo: 'text',
       name: name,
       marker: {
-        symbol: index
+        symbol: index,
+        opacity: 0.5
       },
       x,
       y,
-      hovertext: text
+      hovertext,
+      hoverlabel: {
+        align: 'left'
+      }
     }
   })
 }
