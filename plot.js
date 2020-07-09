@@ -80,6 +80,8 @@ Promise.all([loadCSV(rawDataURL), loadCSV(termURL)]).then(([events, terms]) => {
         ]
       },
       rangeslider: {
+        bgcolor: '#E5ECF6',
+        thickness: 0.15,
         yaxis: {
           rangemode: 'match'
         }
